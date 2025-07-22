@@ -14,13 +14,23 @@ A macOS menu bar application that handles `s3://` URLs and opens them in the AWS
 
 ### Quick Install (Recommended)
 
+Download and install the pre-built application with a single command:
+
+```bash
+curl -fsSL https://raw.githubusercontent.com/<username>/S3URLHandler/main/quick-install.sh | bash
+```
+
+This will automatically download, extract, and install S3URLHandler to your Applications folder.
+
+### Install from Source
+
+Build and install from source code:
+
 ```bash
 git clone <repository-url>
 cd S3URLHandler
-./quick-install.sh
+./install-from-source.sh
 ```
-
-This will build and install the app automatically.
 
 ### Manual Build
 
