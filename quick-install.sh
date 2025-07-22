@@ -2,7 +2,7 @@
 
 set -e
 
-DOWNLOAD_URL="https://github.com/user-attachments/files/21376603/S3URLHandler.app.zip"
+DOWNLOAD_URL="https://github.com/user-attachments/files/21376658/S3URLHandler.app.zip"
 APP_NAME="S3URLHandler"
 TEMP_DIR=$(mktemp -d)
 ZIP_FILE="$TEMP_DIR/$APP_NAME.app.zip"
