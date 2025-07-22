@@ -7,6 +7,7 @@ struct ContentView: View {
     @State private var newAccountID = ""
     @State private var selectedBucket = ""
     @State private var selectedAccount = ""
+    @State private var showingAddBucketMapping = false
     
     var body: some View {
         VStack(spacing: 0) {
@@ -90,15 +91,16 @@ struct ContentView: View {
                         Spacer()
                         
                         Button(action: {
+                            showingAddBucketMapping.toggle()
                             selectedBucket = ""
                             selectedAccount = ""
                         }) {
-                            Image(systemName: "plus.circle")
+                            Image(systemName: showingAddBucketMapping ? "minus.circle" : "plus.circle")
                         }
                         .buttonStyle(PlainButtonStyle())
                     }
                     
-                    if selectedBucket.isEmpty {
+                    if showingAddBucketMapping {
                         HStack {
                             StableTextFieldView(placeholder: "Bucket name", text: $selectedBucket)
                             
@@ -116,6 +118,7 @@ struct ContentView: View {
                                     configManager.addBucketMapping(bucket: selectedBucket, account: selectedAccount)
                                     selectedBucket = ""
                                     selectedAccount = ""
+                                    showingAddBucketMapping = false
                                 }
                             }
                             .disabled(selectedBucket.isEmpty || selectedAccount.isEmpty)
@@ -201,6 +204,7 @@ struct ContentView: View {
                                     }
                                 }
                                 .buttonStyle(.borderedProminent)
+                                .foregroundColor(.white)
                                 .disabled(newAccountName.isEmpty || newAccountID.count != 12)
                             }
                         }
