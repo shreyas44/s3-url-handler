@@ -158,6 +158,7 @@ struct ContentView: View {
                 Button("Quit") {
                     NSApplication.shared.terminate(nil)
                 }
+                .foregroundColor(.white)
                 .padding()
             }
         }
