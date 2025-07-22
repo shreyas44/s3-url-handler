@@ -17,7 +17,7 @@ A macOS menu bar application that handles `s3://` URLs and opens them in the AWS
 Download and install the pre-built application with a single command:
 
 ```bash
-curl -fsSL https://raw.githubusercontent.com/<username>/S3URLHandler/main/quick-install.sh | bash
+curl -fsSL https://raw.githubusercontent.com/shreyas44/s3-url-handler/main/quick-install.sh | bash
 ```
 
 This will automatically download, extract, and install S3URLHandler to your Applications folder.
@@ -27,8 +27,8 @@ This will automatically download, extract, and install S3URLHandler to your Appl
 Build and install from source code:
 
 ```bash
-git clone <repository-url>
-cd S3URLHandler
+git clone https://github.com/shreyas44/s3-url-handler.git
+cd s3-url-handler
 ./install-from-source.sh
 ```
 
@@ -37,8 +37,8 @@ cd S3URLHandler
 For more control over the build process:
 
 ```bash
-git clone <repository-url>
-cd S3URLHandler
+git clone https://github.com/shreyas44/s3-url-handler.git
+cd s3-url-handler
 ./build.sh
 ```
 
