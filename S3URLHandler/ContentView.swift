@@ -159,41 +159,66 @@ struct ContentView: View {
             }
         }
         .frame(width: 350)
-        .sheet(isPresented: $showingAddAccount) {
-            VStack(spacing: 16) {
-                Text("Add AWS Account")
-                    .font(.headline)
-                
-                StableTextFieldView(placeholder: "Account Name", text: $newAccountName)
-                
-                StableTextFieldView(placeholder: "Account ID (12 digits)", text: $newAccountID)
-                
-                HStack {
-                    Button("Cancel") {
-                        newAccountName = ""
-                        newAccountID = ""
-                        showingAddAccount = false
-                    }
-                    
-                    Spacer()
-                    
-                    Button("Add") {
-                        if !newAccountName.isEmpty && newAccountID.count == 12 {
-                            configManager.addAccount(name: newAccountName, id: newAccountID)
-                            newAccountName = ""
-                            newAccountID = ""
-                            showingAddAccount = false
+        .overlay(
+            Group {
+                if showingAddAccount {
+                    ZStack {
+                        // Background that blocks clicks
+                        Color.black.opacity(0.3)
+                            .edgesIgnoringSafeArea(.all)
+                            .onTapGesture {
+                                // Close when clicking background
+                                newAccountName = ""
+                                newAccountID = ""
+                                showingAddAccount = false
+                            }
+                        
+                        // The actual popup content
+                        VStack(spacing: 16) {
+                            Text("Add AWS Account")
+                                .font(.headline)
+                            
+                            StableTextFieldView(placeholder: "Account Name", text: $newAccountName)
+                            
+                            StableTextFieldView(placeholder: "Account ID (12 digits)", text: $newAccountID)
+                            
+                            HStack {
+                                Button("Cancel") {
+                                    newAccountName = ""
+                                    newAccountID = ""
+                                    showingAddAccount = false
+                                }
+                                .buttonStyle(.bordered)
+                                
+                                Spacer()
+                                
+                                Button("Add") {
+                                    if !newAccountName.isEmpty && newAccountID.count == 12 {
+                                        configManager.addAccount(name: newAccountName, id: newAccountID)
+                                        newAccountName = ""
+                                        newAccountID = ""
+                                        showingAddAccount = false
+                                    }
+                                }
+                                .buttonStyle(.borderedProminent)
+                                .disabled(newAccountName.isEmpty || newAccountID.count != 12)
+                            }
+                        }
+                        .padding()
+                        .frame(width: 300)
+                        .background(Color(NSColor.windowBackgroundColor))
+                        .cornerRadius(10)
+                        .shadow(radius: 10)
+                        .onTapGesture {
+                            // Prevent clicks on the popup from closing it
+                        }
+                        .onAppear {
+                            // Force the window to take focus
+                            NSApp.activate(ignoringOtherApps: true)
                         }
                     }
-                    .disabled(newAccountName.isEmpty || newAccountID.count != 12)
                 }
             }
-            .padding()
-            .frame(width: 300)
-            .onAppear {
-                // Force the sheet to take focus
-                NSApp.activate(ignoringOtherApps: true)
-            }
-        }
+        )
     }
 }

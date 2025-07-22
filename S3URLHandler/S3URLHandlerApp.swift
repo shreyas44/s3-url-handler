@@ -7,8 +7,21 @@ class StableTextField: NSTextField {
     override func becomeFirstResponder() -> Bool {
         if let window = self.window {
             window.makeKey()
+            window.makeFirstResponder(self)
         }
         return super.becomeFirstResponder()
+    }
+    
+    override func mouseDown(with event: NSEvent) {
+        // Ensure the window stays active when clicking the text field
+        if let window = self.window {
+            window.makeKey()
+        }
+        super.mouseDown(with: event)
+    }
+    
+    override var acceptsFirstResponder: Bool {
+        return true
     }
 }
 
