@@ -85,11 +85,4 @@ echo "   3. Click 'Open' in the security dialog"
 echo "   (You only need to do this once)"
 echo
 
-read -p "Would you like to launch $APP_NAME now? (y/n): " -n 1 -r
-echo
-if [[ $REPLY =~ ^[Yy]$ ]]; then
-    echo "🚀 Launching $APP_NAME..."
-    open "/Applications/$APP_NAME.app"
-fi
-
 echo "✨ Done! $APP_NAME is ready to use."
