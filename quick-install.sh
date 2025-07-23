@@ -57,8 +57,9 @@ chmod -R 755 "/Applications/$APP_NAME.app"
 find "/Applications/$APP_NAME.app/Contents/MacOS" -type f -exec chmod +x {} \;
 
 echo "🔓 Removing all extended attributes..."
-# Remove ALL extended attributes, not just quarantine
-xattr -cr "/Applications/$APP_NAME.app"
+# Remove ALL extended attributes recursively
+find "/Applications/$APP_NAME.app" -type f -exec xattr -c {} \; 2>/dev/null || true
+find "/Applications/$APP_NAME.app" -type d -exec xattr -c {} \; 2>/dev/null || true
 
 echo "✍️  Applying ad-hoc signature..."
 # Force re-sign with ad-hoc signature
